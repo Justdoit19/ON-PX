@@ -1,13 +1,14 @@
+//맨처음 /homepage접속시 상품들을 업로드 해주는 페이지
 import React, { useEffect, useState } from 'react'
 import { FaCode } from "react-icons/fa";
-import axios from "axios";
-import { Icon, Col, Card, Row, Carousel } from 'antd';
+import axios from "axios"; // 백엔드 데이터 요청
+import { Icon, Col, Card, Row, Carousel } from 'antd'; // antd 디자인 라이브러리 가져오기
 import Meta from 'antd/lib/card/Meta';
 import ImageSlider from '../../utils/ImageSlider';
 import Checkbox from './Sections/CheckBox';
 import Radiobox from './Sections/RadioBox';
 import SearchFeature from './Sections/SearchFeature';
-import { continents, price } from './Sections/Datas';
+import { classify, price } from './Sections/Datas';
 
 function LandingPage() {
 
@@ -16,7 +17,7 @@ function LandingPage() {
     const [Limit, setLimit] = useState(8)
     const [PostSize, setPostSize] = useState(0)
     const [Filters, setFilters] = useState({
-        continents: [],
+        classify: [],
         price: []
     })
     const [SearchTerm, setSearchTerm] = useState("")
@@ -33,7 +34,7 @@ function LandingPage() {
     }, [])
 
     const getProducts = (body) => {
-        axios.post('/api/product/products', body)
+        axios.post('/api/product/products', body)//백엔드 데이터 요청
             .then(response => {
                 if (response.data.success) {
                     if (body.loadMore) {
@@ -65,7 +66,7 @@ function LandingPage() {
         setSkip(skip)
     }
 
-
+    // 랜딩을 해주는 함수
     const renderCards = Products.map((product, index) => {
 
         return <Col lg={6} md={8} xs={24} key={index}>
@@ -74,7 +75,7 @@ function LandingPage() {
             >
                 <Meta
                     title={product.title}
-                    description={`$${product.price}`}
+                    description={`${product.price}원`}
                 />
             </Card>
         </Col>
@@ -109,7 +110,6 @@ function LandingPage() {
     const handleFilters = (filters, category) => {
 
         const newFilters = { ...Filters }
-
         newFilters[category] = filters
 
         console.log('filters', filters)
@@ -143,15 +143,14 @@ function LandingPage() {
         <div style={{ width: '75%', margin: '3rem auto' }}>
 
             <div style={{ textAlign: 'center' }}>
-                <h2>Let's Travel Anywhere <Icon type="rocket" /> </h2>
+                <h2><Icon type="rocket" />   ON-PX 에서 기다리지 말고 주문하자!  <Icon type="rocket" /> </h2>
             </div>
 
             {/* Filter */}
-
             <Row gutter={[16, 16]}>
                 <Col lg={12} xs={24}>
                     {/* CheckBox */}
-                    <Checkbox list={continents} handleFilters={filters => handleFilters(filters, "continents")} />
+                    <Checkbox list={classify} handleFilters={filters => handleFilters(filters, "classify")} />
                 </Col>
                 <Col lg={12} xs={24}>
                     {/* RadioBox */}

@@ -33,6 +33,9 @@ function RightMenu(props) {
   } else {
     return (
       <Menu mode={props.mode}>
+        <Menu.Item key="explain">
+          <a href="/explain">사용 방법</a>
+        </Menu.Item>
         <Menu.Item key="history">
           <a href="/history">결제 내역</a>
         </Menu.Item>

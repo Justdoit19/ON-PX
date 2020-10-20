@@ -8,7 +8,7 @@ function Footer() {
             flexDirection: 'column', alignItems: 'center',
             justifyContent: 'center', fontSize:'1rem'
         }}>
-           <p> ON-PX에 오신 것을 환영합니다.  <Icon type="smile" /></p>
+           <p> <Icon type="smile"/>   ON-PX에 오신 것을 환영합니다.  <Icon type="smile" /></p>
         </div>
     )
 }

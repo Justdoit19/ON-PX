@@ -1,26 +1,26 @@
 import React, { useState } from 'react'
-import { Typography, Button, Form, Input } from 'antd';
+import { Typography, Button, Form, Input } from 'antd';//Form 을 만들어 주는 디자인 
 import FileUpload from '../../utils/FileUpload';
 import Axios from 'axios';
 const { TextArea } = Input;
 
-const Continents = [
-    { key: 1, value: "Africa" },
-    { key: 2, value: "Europe" },
-    { key: 3, value: "Asia" },
-    { key: 4, value: "North America" },
-    { key: 5, value: "South America" },
-    { key: 6, value: "Australia" },
-    { key: 7, value: "Antarctica" }
+const Classifys = [
+    { key: 1, value: "과자" },
+    { key: 2, value: "음료수" },
+    { key: 3, value: "아이스크림" },
+    { key: 4, value: "냉동식품" },
+    { key: 5, value: "샤워용품" },
 ]
 
-function UploadProductPage(props) {
+function UploadProductPage(props) {//auth의 자식페이지
 
     const [Title, setTitle] = useState("")
     const [Description, setDescription] = useState("")
     const [Price, setPrice] = useState(0)
-    const [Continent, setContinent] = useState(1)
     const [Images, setImages] = useState([])
+    const [Classify, setClassify] = useState(1)
+    // const 처리를 하는 이유는 핸들러를 통해 value 값을 대입하여 
+    //입력이 가능토록 하기위해서 넣었습니다...
 
     const titleChangeHandler = (event) => {
         setTitle(event.currentTarget.value)
@@ -34,39 +34,39 @@ function UploadProductPage(props) {
         setPrice(event.currentTarget.value)
     }
 
-    const continentChangeHandler = (event) => {
-        setContinent(event.currentTarget.value)
-    }
-
     const updateImages = (newImages) => {
         setImages(newImages)
     }
 
+    const classifyChangeHandler = (event) => {
+        setClassify(event.currentTarget.value)
+    }
+
     const submitHandler = (event) => {
         event.preventDefault();
-
-        if (!Title || !Description || !Price || !Continent || Images.length === 0) {
+        // 서밋 핸들러를 통해 서버로 데이터 값을 저장
+        if (!Title || !Description || !Price || !Classify || Images.length === 0) {
             return alert(" 모든 값을 넣어주셔야 합니다.")
-        }
+        }//유효성 체크, 체크를 하여야 넘어가짐
 
 
         //서버에 채운 값들을 request로 보낸다.
 
         const body = {
             //로그인 된 사람의 ID 
-            writer: props.user.userData._id,
+            writer: props.user.userData._id,//자식 데이터기 때문에 데이터 가져오기
             title: Title,
             description: Description,
             price: Price,
-            images: Images,
-            continents: Continent
+            images: Images, // 이미지를 input 시켜줌
+            classify : Classify // 과자, 음료수등으로 분류를 해주는 기능
         }
 
         Axios.post('/api/product', body)
             .then(response => {
                 if (response.data.success) {
                     alert('상품 업로드에 성공 했습니다.')
-                    props.history.push('/')
+                    props.history.push('/')//다시 본문 페이지로 돌아오는데 성공하는 페이지
                 } else {
                     alert('상품 업로드에 실패 했습니다.')
                 }
@@ -94,12 +94,12 @@ function UploadProductPage(props) {
                 <TextArea onChange={descriptionChangeHandler} value={Description} />
                 <br />
                 <br />
-                <label>가격($)</label>
+                <label>가격(원)</label>
                 <Input type="number" onChange={priceChangeHandler} value={Price} />
                 <br />
                 <br />
-                <select onChange={continentChangeHandler} value={Continent}>
-                    {Continents.map(item => (
+                <select onChange={classifyChangeHandler} value={Classifys}>
+                    {Classifys.map(item => (
                         <option key={item.key} value={item.key}> {item.value}</option>
                     ))}
                 </select>

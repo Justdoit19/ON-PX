@@ -11,7 +11,7 @@ const productSchema = mongoose.Schema({
         maxlength: 50
     },
     description: {
-        type: String,
+        type: String, // 물건을 설명해주는 값
     },
     price: {
         type: Number,
@@ -27,7 +27,7 @@ const productSchema = mongoose.Schema({
         default: 0
     },
 
-    continents: {
+    classify: {
         type: Number,
         default: 1
     },

@@ -1,65 +1,56 @@
-const continents = [
+const classify = [
     {
         "_id": 1,
-        "name": "Africa"
+        "name": "과자"
     },
     {
         "_id": 2,
-        "name": "Europe"
+        "name": "음료수"
     },
     {
         "_id": 3,
-        "name": "Asia"
+        "name": "아이스크림"
     },
     {
         "_id": 4,
-        "name": "North America"
+        "name": "냉동식품"
     },
     {
         "_id": 5,
-        "name": "South America"
-    },
-    {
-        "_id": 6,
-        "name": "Australia"
-    },
-    {
-        "_id": 7,
-        "name": "Antarctica"
+        "name": "샤워용품"
     }
-
 ]
 
 const price = [
     {
         "_id": 0,
-        "name": "Any",
+        "name": "모든 값",
         "array": []
     },
     {
         "_id": 1,
-        "name": "$0 to $199",
-        "array": [0, 199]
+        "name": "1000 ~ 3000",
+        "array": [1000, 3000]
     },
     {
         "_id": 2,
-        "name": "$200 to $249",
-        "array": [200, 249]
+        "name": "3000 ~ 5000",
+        "array": [3000, 5000]
     },
     {
         "_id": 3,
-        "name": "$250 to $279",
-        "array": [250, 279]
+        "name": "5000 ~ 7000",
+        "array": [5000, 7000]
     },
     {
         "_id": 4,
-        "name": "$280 to $299",
+        "name": "7000 ~ 10000",
         "array": [280, 299]
     },
     {
         "_id": 5,
-        "name": "More than $300",
-        "array": [300, 1500000]
+        "name": "10000원 이상",
+        "array": [10000, 1500000]
     }
 ]
 
@@ -67,6 +58,6 @@ const price = [
 
 
 export {
-    continents,
-    price
+    price,
+    classify
 }
